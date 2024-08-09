@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        // Question: How do you convert a base 10 number to binary
+
+        // Solution: Keep track of the division of the number with 2 till we find that the result is 0.
+        // Then revert the digits and you get the binary number.
+
+        function convertFrom10To2(num) {
+            if (!num && num !== 0) {
+                return "Not valid number";
+            }
+
+            var binary = [];
+
+            if (num === 0) {
+                return 0;
+            } else {
+                while (num !== 0) {
+                    remaining = num % 2;
+                    num = Math.floor(num / 2); // that's how to take the int result from the division
+
+                    binary.push(remaining);
+                }
+
+                return +binary.reverse().join("");
+            }
+        }
+
+        console.log(convertFrom10To2(161) + " - should be 10100001");
+        console.log(convertFrom10To2(583) + " - should be 1001000111");
+
+        // border cases:
+        console.log(convertFrom10To2(0) + " - should be 0");
+        console.log(convertFrom10To2(1) + " - should be 1");
+        console.log(convertFrom10To2(null) + " - should throw an error");
+        console.log(convertFrom10To2(9) + " - should be 1001");
+
+    </script>
+</body>
+</html>

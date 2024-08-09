@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        /*
+        abc, bac, bca, acb, cab, cba
+
+         * example:
+         * he
+         *  he, ge, je, hw, hr, gw, gr, jw, jr
+         *  he, hr, hw, ge, gr, gw, je, jr, jw
+         *  hee, hre, hwe, gee, g
+         * 3! * number of characters
+         * 
+         * hee
+         *  hee, hwe, hre, hwe, hww, hwr, hre, hrr, hrw
+         * 
+         * hello
+            gello
+            jello
+            gwllo
+            grllo
+            jwllo
+            jrllo
+
+            1. solution:
+                iterate over each character and use it to combine it in a second for while iterating over the word.
+                n^2 complexit
+            2. solution:
+                pass into the getNearbyChars function the characters of the word sequentially and then combine the extracted characters together
+
+         */
+        function getNearbyChars(char) {
+            if (char === "h") {
+                return ["g", "h", "j"];
+            } else {
+                return ["w", "e", "r"];
+            }
+        }
+
+        function isWord(str) {
+            //
+        }
+
+        // 2. solution:
+        function nearbyWords(str) {
+            // find the characters from left and right to the needed character -> this is done by getNearbyChars
+
+            //
+            var strLength = str.length;
+            var index = 0;
+
+            var possibleWords = [""]; // give the array length of 1 so that the algorithm can start
+
+            while (index<strLength) {
+                //str.slice(0, index), str.slice(index, index+1) 
+                
+                possibleWords = createWord(possibleWords, getNearbyChars(str.charAt(index)));
+                index++;
+            }
+
+
+            // return a list of all nearby words
+            return possibleWords;
+        }
+
+        function createWord(list1, list2) {
+            var newList = [];
+            for (var i=0; i<list1.length; i++) {
+                for (var j=0; j<list2.length; j++) {
+                    newList.push(list1[i] + list2[j]);
+                }
+            }
+            return newList;
+        }
+
+        console.log(nearbyWords("hee"));
+    </script>
+</body>
+</html>
+
+
+

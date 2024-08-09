@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        function testExpression(exp) {
+            empty();
+            var expLength = exp.length;
+            
+            for (var i=0; i<expLength; i++) {
+                var char = exp.charAt(i);
+                switch (char) {
+                    case "{":
+                    case "(":
+                    case "[":
+                        add(char);
+                        break;
+                    case "}":
+                    case ")":
+                    case "]":
+                        var sign = remove();
+                        if (sign === "(" &&
+                            char === ")") {
+                            break;
+                        }
+                         if (sign === "[" &&
+                            char === "]") {
+                            break;
+                        }
+                        if (sign === "{" &&
+                            char === "}") {
+                            break;
+                        }
+                        return "NO";                     
+                }           
+            }
+
+            // check for remaining brackets in the stack. This is a sign for not closed pairs.
+            if (isEmpty()) {
+                return "NO";
+            }
+
+            return "YES";
+        }
+        console.log(testExpression("{[()]}"));
+        console.log(testExpression("}(]}){"));
+    </script>
+</body>
+</html>

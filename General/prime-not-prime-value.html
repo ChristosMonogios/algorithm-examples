@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        // Question: Based on the input number find if the number is prime or not.
+        // A prime is a natural number greater than 1 that has no positive divisors other than 1 and itself.
+        // The number 1 is not prime
+
+        // The O(n) algorithm, since we calculate the modulo for each number between 1 and n
+        function checkForPrimeLinear(val) {
+            if (val === 1) {
+                return "Not prime";
+            }
+
+            for (var i=2; i <val; i++) {
+                if (val%i === 0) {
+                    return "Not prime";
+                }
+            }
+
+            return "Prime";
+        }
+
+        // The O(Sqrt(n)) algorithm, since we only check the numbers between 2 and sqrt(n)
+        function checkForPrimeGood(val) {
+            if (val === 1) {
+                return "Not prime";
+            } else if (val === 2) {
+                return "Prime";
+            }
+
+            var i = 2;
+            var sqrt = Math.sqrt(val);
+            while (i <= sqrt) {
+                if (val%i === 0) {
+                    return "Not prime";
+                }
+                i++;
+            }
+            return "Prime";
+        }
+
+        console.log(checkForPrimeLinear(9));
+        console.log(checkForPrimeLinear(17));
+        console.log(checkForPrimeLinear(20));
+        console.log(checkForPrimeLinear(31));
+        console.log(checkForPrimeLinear(101));
+
+        // border cases:
+        console.log(checkForPrimeGood(1);
+        console.log(checkForPrimeGood(2);
+
+        console.log(checkForPrimeGood(9));
+        console.log(checkForPrimeGood(17));
+        console.log(checkForPrimeGood(20));
+        console.log(checkForPrimeGood(31));
+        console.log(checkForPrimeGood(101));
+    </script>
+</body>
+</html>

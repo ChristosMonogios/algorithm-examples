@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        // Question:
+        // Given two arrays (sorted & distinct), find the number of elements in common
+
+        // The complexity of the current solution is O(2n) -> O(n)
+        // The worst solution would be if I linearly checked each number of array1 against each number of array2.
+        //      in that case the complexity is O(n^2)
+        function findCommonNumbers(arr1, arr2) {
+            var length1 = arr1.length;
+            var length2 = arr2.length;
+
+            var numberHash = {};
+            var currentNumber = 0;
+
+            var numberOfCommonNumbers = 0;
+
+            for (var i=0; i<length1; i++) {
+                currentNumber = arr1[i];
+                
+                // We do not have to keep track of the occurences of each number, since the question says distinct.
+                // For this reason we simply initialize the new hash element with a true value
+                // and we check for true afterwards, while we parse the second array.
+                numberHash[currentNumber] = true;
+            }
+
+            for (i=0; i<length2; i++) {
+                currentNumber = arr2[i];
+                if (numberHash[currentNumber]) {
+                    numberOfCommonNumbers++;
+                } 
+            }
+
+            return numberOfCommonNumbers;
+        }
+
+        var arr1 = [1,5,6,7,12,54,91];
+        var arr2 = [1,7,12,15,56,78,91];
+
+        console.log(findCommonNumbers(arr1, arr2));
+    </script>
+</body>
+</html>

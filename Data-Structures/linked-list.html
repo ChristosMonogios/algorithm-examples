@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        function LinkedList(val) {
+            this.head = new LinkedListItem(val);
+        }
+
+        function LinkedListItem(value) {
+            this.value = value;
+            this.next = null;
+        }
+
+        LinkedList.prototype = {
+            // Add the element at the end of the linked list
+            append: function(val) {
+                var newItem = new LinkedListItem(val);
+                var current = this.head;
+
+                if (!current) {
+                    this.head = newItem;
+                } else {
+                    while (true) {
+                        if (current.next) {
+                            current = current.next;
+                        } else {
+                            current.next = newItem;
+                            break;
+                        }
+                    }
+                }
+
+
+            },
+            // Add the element at the beginning of the linked list
+            prepend: function(val) {
+                var newItem = new LinkedListItem(val);
+                var current = this.head;
+
+                this.head = newItem;
+                newItem.next = current;
+            },
+
+            deleteWithValue: function(val) {
+                var current = this.head;
+
+                if (!current) {
+                    return;
+                }
+
+                if (current.value === val) {
+                    this.head = current.next;
+                } else {
+                    var previous = null;
+
+                    while (true) {
+                        if (current.value === val) {
+                            if (current.next) { // special case for last element
+                                previous.next = current.next;
+                            } else {
+                                previous.next = null;
+                            }
+                            current = null; // avoid memory leaks
+                            break;
+                        } else {
+                            previous = current;
+                            current = current.next;
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

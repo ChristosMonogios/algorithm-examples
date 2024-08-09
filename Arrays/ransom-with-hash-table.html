@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        /**
+         * https://www.hackerrank.com/challenges/ctci-ransom-note
+         */
+        
+        var magazine = "give me one grand today night".split(" ");
+        var ransom = "give one grand today".split(" ");
+        var magLen = magazine.length;
+        var ranLen = ransom.length;
+        
+        var hash = {};
+        
+        var currentMagazineWord;
+        
+        // We create a hash map (in JS a simple object), and we count the times of appearence of each word in the magazine
+        // We then iterate over the ransom and check if the hash map contains the word and also we 
+        // decrease its appearence count, if we do not find the word any more, then we stop the execution
+
+        // Positive of this approach is that we only use one hash map, instead of two!!
+
+        for (var i=0; i<magLen; i++) {
+            currentMagazineWord = magazine[i];
+            if (!hash[currentMagazineWord]) {
+                hash[currentMagazineWord] = 0;
+            }
+            hash[currentMagazineWord]++;
+        }
+
+        var currentRansomWord;
+        
+        for (i=0; i<ranLen; i++) {
+            currentRansomWord = ransom[i];
+
+            if (!hash.hasOwnProperty(currentRansomWord)) { // or just check with has[...]
+                console.log("No");
+                break;
+            } else {
+                hash[currentRansomWord] -= 1;
+                if (hash[currentRansomWord] === 0) {
+                    delete hash[currentRansomWord];
+                }
+            }
+        }
+        console.log("Yes");
+    </script>
+</body>
+</html>

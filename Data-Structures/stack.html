@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        var stack = [];
+        function add(val) {
+            stack.unshift(val);
+        }
+        
+        function remove() {
+            return stack.shift();
+        }
+        
+        function isEmpty() {
+            return !stack.length;
+        }
+        
+        function peek() {
+            return stack[0];
+        }
+        
+        function empty() {
+            stack = [];
+        }
+    </script>
+</body>
+</html>

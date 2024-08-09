@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        function merge(arr, low, mid, high) {
+            var lowArr = [];
+            var highArr = [];
+            var k = low; // counter for filling the low and high arays
+
+            for (var i=0; i<mid; k++, i++) {
+                lowArr.push(arr[k]);
+            }
+
+            for (var j=0; j<high; k++, i++) {
+                highArr.push(arr[k]);
+            }
+
+            k = p;
+            i = j = 0;
+
+             while(i < lowArr.length && j < highArr.length) {
+                 if (lowArr[i] < highArr[j]) {
+                     arr[k] = lowArr[i++];
+                 } else if () {
+                     arr[k] = highArr[j++];
+                 }
+                 k++;
+             }
+
+             for (i=0; i<mid; i++, k++) {
+                 arr[k] = lowArr[k];
+             }
+
+             for (i=0; i<high; i++, k++) {
+                 arr[k] = highArr[k];
+             }
+        }
+
+        // Takes in an array that has two sorted subarrays, from [p..q] and [q+1..r], and merges the array
+        function merge(array, p, q, r) {
+
+            // 1. step : allocate two temp arrays for copying the original values:
+            var lowHalf = [];
+            var highHalf = [];
+
+            // The starting index in the original array
+            var k = p;
+
+            // The starting index in the lowHalf array
+            var i;
+
+            // The starting index in the highHalf array
+            var j;
+
+            // Copy the values of the original array to the temp arrays:
+            for (i=0; k<=q; k++, i++) { // from 0 to q
+                lowHalf[i] = array[k];
+            }
+
+            for (j=0; k<=r; j++, k++) { // from q+1 to r
+                highHalf[j] = array[k];
+            }
+
+            // Reset the variables, before we start with the copying:
+            k = p; // p is the left-most index
+            i = j = 0;
+
+            // 2. step: Copy the smallest values in order into the original array.
+            // We only need the three variables for this step
+            while (i < lowHalf.length && j < highHalf.length) {
+                if (lowHalf[i] < highHalf[j]) {
+                    array[k] = lowHalf[i++];
+                } else {
+                    array[k] = highHalf[j++];
+                }
+                k++;
+            }
+
+            // 3. step: add the remaining elements into the original array
+            // use two while loops to cover both cases (lowHalf, highHalf)
+            while (i < lowHalf.length) {
+                array[k++] = lowHalf[i++];
+            }
+
+            while (j < highHalf.length) {
+                array[k++] = highHalf[j++];
+            }
+
+            // The sub-array is now sorted
+        };
+
+        // Takes in an array and recursively merge sorts it
+        function mergeSort(array, p, r) {
+            /**
+             * base case: left border is not greater or equal to right border
+             * if that's the case, then the array has only 1 or 0 element, and we do not wont to merge it further
+             */
+            if (p < r) {
+                var q = Math.floor((p + r)/ 2);
+                mergeSort(array, p, q); // divide the left part
+                mergeSort(array, q+1, r); // divide the right part
+                merge(array, p, q, r); // merge the parts together
+            }  
+        }
+
+        function mergeSort(arr, lowBorder, highBorder) {
+            if (lowBorder < highBorder) {
+                var middle = (lowBorder + highBorder) / 2;
+                mergeSort(arr, lowBorder, middle);
+                mergeSort(arr, midde+1, highBorder);
+                merge(arr, lowBorder, middle, highBorder);
+            }
+        }
+
+        var array = [14, 7, 3, 12, 9, 11, 6, 2];
+        mergeSort(array, 0, array.length-1);
+        console.log(array);
+    </script>
+</body>
+</html>

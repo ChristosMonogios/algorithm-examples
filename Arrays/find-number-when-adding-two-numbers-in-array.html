@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        /*
+         * Given an array of numbers e.g. {3,6,4,9} and a result e.g. {7} 
+         * write a solution that will determine if any 2 numbers in the given array when added together result
+         * in the given result. This can be written in any programming language.  
+         */
+
+        // The linear way: 
+        // use two for loops, one to iterate over all elements and for each element iterate over all elements and compare.
+        // Possible optimization: Do not do the calculation, if the compared number is bigger than the searched number
+        // time complexity: O(n^2)
+
+        // The binary way:
+        // Sort the numbers with divide and conquer - O(nlogn)
+        // Create a second array. Its elements are the abstraction of the searched number from each number in the original array - O(n)
+        // Search inside the original array for each of the numbers inside the second array O(nlogn)
+        // total time complexity: O(nlogn + n + logn) -> O(logn)
+
+
+        var arr = [9, 4, 3, 6];
+        var searchedNumber = 7;
+
+        function findTwoNumbers(arr, searchedNumber) {
+            // 1. step: sort the numbers with an O(nlogn) algorithm - O(nlogn) complexity
+            arr = [3,4,6,9];
+
+            // optimization: remove the elements that are greater than the searched number
+
+            // 2. step: store the substraction of each element - O(n)
+            var differences = [];
+            for (var i=0; i<arr.length; i++) {
+                differences.push(Math.abs(arr[i] - searchedNumber));
+            }
+
+            // 3. step: search with binary search for the number starting from the left - O(logn)
+            for (var i=0; i< arr.length; i++) {
+                if (binarySearch(arr, differences[i])) {
+                    return [arr[i], differences[i]];
+                }
+            }
+        }
+
+        console.log(findTwoNumbers(arr, searchedNumber));
+
+        function binarySearch() {
+            // see the Search/binary-search.html file
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        // go down to the string until there is one or no character in the string, if that's the case then
+        // we have a palindrome
+        function palindrome(str) {
+            // base case:
+            if (str.length <= 1) return true;
+
+            if (str[0] === str[str.length-1]) {
+                // recursive case:
+                return palindrome(str.slice(1, str.length-1));
+            } else {
+                return false;
+            }   
+        }
+
+        console.log(palindrome("rotor"));
+        console.log(palindrome("rottor"));
+        console.log(palindrome("r"));
+        console.log(palindrome(""));
+    </script>
+</body>
+</html>

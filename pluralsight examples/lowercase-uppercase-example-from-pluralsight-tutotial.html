@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        /*
+         * Question: Given a title as a string, you have to normalize it based on the following rules:
+         * 1. capitalize the first word
+         * 2. capitalize the last word
+         * 3. if the word can be found in this list: ["a", "the", "to", "at", "in", "with", "and", "but", "or"] then lowercase it
+         * 4. if not then capizalize the word 
+         */
+
+        function convertTitle(title) {
+            var lowercasedWords = ["a", "the", "to", "at", "in", "with", "and", "but", "or"];
+
+            // Optimization 1.: lowercase everything before starting, since we are doing it for every word either way
+            title = doLowerCase(title);
+
+            // split the title into words:
+            var titleAsWords = title.split(" ");
+            var lengthOfTitleAsWords = titleAsWords.length;
+            var currentWord = "";
+
+            // capitalize word[0]
+            titleAsWords[0] = capitalizeWord(titleAsWords[0]);
+
+            // capitalize word [last]
+            titleAsWords[lengthOfTitleAsWords-1] = capitalizeWord(titleAsWords[lengthOfTitleAsWords-1]);
+
+            // for the words between 0 and last prove if they belong in the list and lowercase them or else uppercase them
+            for (var i=1; i<titleAsWords.length-1; i++) {
+                currentWord = titleAsWords[i];
+
+                // Optimization step 2.: we started with an if...else... but since we lowercased everything
+                // at the beginning, we do not need the else case any more
+
+                // Optimization step 3.: we could take the two lines from above (first and last word)
+                // into this if case and check for them with ... or ... or ...
+
+                if (!lowercasedWords.includes(currentWord)) {
+                    titleAsWords[i] = capitalizeWord(currentWord);
+                }
+            }
+
+            // Combine the words back into a title
+            return titleAsWords.join(" ");
+        }
+
+        function doLowerCase(str) {
+            return str.toLowerCase();
+        }
+
+        function capitalizeWord(word) {
+            return word.charAt(0).toUpperCase() + word.slice(1, word.length);
+        }
+
+        // Test 1:
+        console.log(convertTitle("wHy DoeS A biRd Fly?"));
+
+        // Test 2:
+        console.log(convertTitle("i love solving problems and it is fun"));
+
+        // Check also corner cases:
+        console.log(convertTitle("aT"));
+        console.log(convertTitle(""));
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        /**
+         * Bubblesort:
+         * iterate over the array and swap the elements till we do not have to swap any element
+         * A sorted area inside the array is created on the right side of the array.
+         * An unsorted area inside the array is on the left.
+         */
+
+        function swapTwoElements(arr, index1, index2) {
+            var temp = arr[index1];
+            arr[index1] = arr[index2];
+            arr[index2] = temp;
+        }
+
+        function bubbleSort(arr) {
+            var wasSomethingSwapped = false;
+            var compares = 0;
+
+            for (var i=0; i<arr.length-1; i++) {
+                for (var j=0; j<arr.length-1; j++) {
+                    compares++;
+                    if (arr[j] > arr[j+1]) {
+                        swapTwoElements(arr, j, j+1);
+                        wasSomethingSwapped = true;
+                    }
+                }
+
+                if (!wasSomethingSwapped) {
+                    break;
+                }
+            }
+
+            console.log("Compares: " + compares);
+            return arr;
+        }
+
+        var arr = [2, 1, 5, 4, 3];
+        console.log(bubbleSort(arr));
+
+        /**
+         * after each iteration, a new item on the right side of the array is sorted.
+         * So we do not iterate over these items. We re-calculate the unsortedLength variable for this reason
+         */
+        function bubbleSortOptimized(arr) {
+            var wasSomethingSwapped = true;
+            var unsortedLength = arr.length
+            var compares = 0;
+
+            while(wasSomethingSwapped) {
+                unsortedLength--;
+                wasSomethingSwapped = false;
+                for (var i=0;i<unsortedLength-1; i++) {
+                    compares++;
+                    if (arr[i] > arr[i+1]) {
+                        swapTwoElements(arr, i, i+1);
+                        wasSomethingSwapped = true;
+                    }
+                }
+            }
+            console.log("Compares: " + compares);
+            return arr;         
+        }
+
+        arr = [2, 1, 5, 4, 3];
+        console.log(bubbleSortOptimized(arr));
+
+        /**
+         * A third version of the algorithm
+         */
+        function bubbleSortMine(arr) {
+            var len = arr.length;
+            var swapMade = true;
+            var compares = 0;
+            var unsortedItemLength = len;
+
+            while (swapMade) {
+                swapMade = false;
+                
+                for (var i=0; i<len; i++) {
+                    compares++;
+                    if (arr[i] > arr[i+1]) {
+                        swapTwoElements(arr, i, i+1);
+                        swapMade = true;
+                    }
+                }
+                len = len-1-i;
+            }
+
+            console.log("Compares: " + compares);
+            return arr;
+        }
+
+        arr = [2, 1, 5, 4, 3];
+        console.log(bubbleSortMine(arr));
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        // The following function is not real recursion!!!!
+        function fibonacciIterative(n, currentN, previousOne, previousTwo) {
+            if (currentN === n) return previousOne + previousTwo;
+            return fibonacciIterative(n, ++currentN, previousOne + previousTwo, previousOne);
+        }
+        console.log(fibonacciIterative(5, 2, 1, 0));
+
+        // The following function is a recursive function with use of memoization
+        var memory = [];
+        function fibonacciRecursion(n) {
+            if (n === 0) {
+                return 0;
+            } else if (n === 1) {
+                return 1;
+            } else {
+                if (!memory[n-1]) {
+                    memory[n-1] = fibonacciRecursion(n-1);
+                }
+                if (!memory[n-2]) {
+                    memory[n-2] = fibonacciRecursion(n-2);
+                }
+                return memory[n-1] + memory[n-2];
+            }
+        }
+        console.log(fibonacciRecursion(5, 2, 1, 0));
+
+        function fibonacciRecursionOptimized(n) {
+            if (n === 0) {
+                return 0;
+            } else if (n === 1) {
+                return 1;
+            } else {
+                if (!memory[n]) {
+                    memory[n] = memory[n-1] + memory[n-2];
+                }
+                return memory[n];
+            }
+        }
+        console.log(fibonacciRecursionOptimized(5, 2, 1, 0));
+    </script>
+</body>
+</html>

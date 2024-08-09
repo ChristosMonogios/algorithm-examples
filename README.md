@@ -1,2 +1,3 @@
 # algorithm-examples
-A collection of algorithmic examples that I wrote many years ago by using JavaScript.
+
+A collection of algorithmic examples that I wrote back in 2017 by using JavaScript.

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        // measure how close a number is to pi
+                    // example 1.:
+            // 1000 -> 100 - 314 = -214
+            // 000 - 314 = -314
+            // -214 + -314 = -528
+            // -528/2 = -264
+
+    // way to find pi match score  
+        // drop decimal from pi -> 314 - OK
+        // start from the three leftmost digit of the number and do XXX - 314 - OK
+            // how to find the three digits?
+            // find the number of digits -> based on this number abstract 3 and add zeros to 1
+            // -> 773569 -> 6 digits -> 3 digits -> 1000 (3 zeros)
+            // divide the number with 1000
+            // get the number left and count its digits and do the same again, till the number left is < 3 digits
+        // keep shift over one digit to the right and do the same until no 3 digits left - with a while till digts left < 3
+        // total score is the average of each 3 digit score - use a sum variable
+        // if length of digits < 3 -> score = 0 - check at the beginning
+        // max length of digits = 12 - check at the beginning
+
+        function calculatePiMatchScore(num) {
+          var numberOfDigits = (num + "").length;
+          
+            if (checkGuardClauses(numberOfDigits)) {
+                return "Please correct the number!";
+            }
+
+            var numberOfIterations = numberOfDigits - 2;
+            var sum = 0;
+            var piWithNoDecimal = 314;
+            var startDigit = 0;
+            var currentIteration = 0;
+
+            while (currentIteration < numberOfIterations) {
+                sum += getSubNumber(num, startDigit) - piWithNoDecimal
+                currentIteration++;
+                startDigit++;
+            }
+
+            return sum / numberOfIterations;
+        }
+
+        function getSubNumber(number, start) {
+            return +number.toString().slice(start, start + 3);
+        }
+
+        function checkGuardClauses(digits) {
+            return digits < 3 || digits > 12;
+        }
+
+        console.log(calculatePiMatchScore(1000));
+        console.log(calculatePiMatchScore(3149));
+        console.log(calculatePiMatchScore(357878));
+
+        // border cases:
+        console.log(calculatePiMatchScore(1));
+        console.log(calculatePiMatchScore(11));
+        console.log(calculatePiMatchScore(1234567890123));
+        console.log(calculatePiMatchScore(314));
+        console.log(calculatePiMatchScore(-1));
+
+        // can I also have such numbers? 000 etc.
+        // strings -> should I also check for them?
+    </script>
+</body>
+</html>

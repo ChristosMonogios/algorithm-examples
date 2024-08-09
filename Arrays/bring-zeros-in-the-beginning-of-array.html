@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        // Given an array of integers, write an in-place function to bring all the zero elements 
+        // to the left of the array keeping the original order. 
+
+        // The linear way:
+        function moveZerosToTheBeginning(arr) {
+            var length = arr.length;
+            for (var i=0; i<length; i++) {
+                if (arr[i] === 0) {
+                    arr.unshift(+arr.splice(i, 1).join());
+                }
+            }
+
+            return arr;
+        }
+
+        // The binary way:
+        // Use it, only if the array is sorted!
+        // Do not use it together with divide and conquer, since it is slower than liner: O(n) < O(nlogn)
+
+        var arr = [0, 5, 12, 11, 9, 0, 1, 99, 12, 55, 3, 0, 0, 0, 6, 44, 31, 0];
+        console.log(moveZerosToTheBeginning(arr));
+    </script>
+</body>
+</html>

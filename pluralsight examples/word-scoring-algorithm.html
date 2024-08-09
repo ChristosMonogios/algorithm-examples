@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        // Possible solutions:
+            // 1. Brute force with regex to extract only the letters which give points
+                // Maybe slow for only 50 maximal characters?
+            // 2. count the score by starting from left to right. Linear parsing of the string
+
+        // Solution 1.:
+        function calculateScoreOfStringBruteForce(str) {
+            var strLength = str.length;
+
+            if (strLength === 0 || strLength > 50) {
+                return score;
+            }
+
+            str = str.toLowerCase();
+
+            var score = 0;
+
+            score += (str.match(/f/g) || []).length * 3;
+            score += (str.match(/j/g) || []).length * 6;
+            score += (str.match(/x/g) || []).length * 12;
+            score += (str.match(/a/g) || []).length * 2;
+            score += (str.match(/i/g) || []).length * 2;
+            score += (str.match(/e/g) || []).length * 2;
+            score += (str.match(/o/g) || []).length * 2;
+            score += (str.match(/t/g) || []).length * 5;
+
+            return score;
+        }
+
+        console.log(calculateScoreOfStringBruteForce("XRay Machine"));
+        console.log(calculateScoreOfStringBruteForce("Jabbt"));
+
+
+
+        // Solution 2.:
+        function calculateScoreOfString(str) {
+            // check for non letter string or for strings with more than 50 characters, if yes then return
+            var strLength = str.length;
+            var score = 0;
+
+            if (strLength === 0 || strLength > 50) {
+                return score;
+            }
+
+            // lowercase the complete string, so that we do not have to care about it
+            str = str.toLowerCase();
+
+            // start from string[0] and iterate till string[last] and count for each character its weight
+            for (var i=0; i<strLength; i++) {
+                score += checkForCharWeight(str.charAt(i));
+            }
+
+            // return the result  
+            return score;         
+        }
+
+        function checkForCharWeight(char) {
+            switch (char) {
+                case "f":
+                    return 3;
+                case "j":
+                    return 6;
+                case "x":
+                    return 12;
+                case "a":
+                case "i": 
+                case "e":
+                case "o":
+                    return 2;
+                case "t":
+                    return 5;
+                default:
+                    return 0;
+            }
+        }
+
+        console.log(calculateScoreOfString("XRay Machine"));
+        console.log(calculateScoreOfStringBruteForce("Jabbt"));
+        
+
+    </script>
+</body>
+</html>

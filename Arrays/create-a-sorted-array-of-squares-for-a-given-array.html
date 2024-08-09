@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        /*
+         * https://www.careercup.com/question?id=5681516425248768
+         * Question: Given: sorted array of integers 
+         * Return: sorted array of squares of those integers
+         *  Ex: [1,3,5] -> [1,9,25] 
+         * Integers can be negative.
+         */
+
+        //Solution:
+            // 1. remove the - of negative numbers with abs -> O(n) (iterate over all elements)
+            // 2. sort the array with mergesort/ quicksort -> O(logn)
+            // 3. use sqr for each element -> O(n)
+
+            // In total time complexity -> O(nlogn)
+            // In total space complexity -> O(n)
+
+        function getSquaresSorted(arr) {
+            var arrLength = arr.length;
+
+            for (var i=0; i<arrLength; i++) {
+                arr[i] = Math.abs(arr[i]);
+            }
+
+            // sort the array with mergesort:
+            arr = [1, 2, 2, 3, 4];
+
+            for (i=0; i<arrLength; i++) {
+                arr[i] = Math.pow(arr[i], 2);
+            }
+
+            return arr;
+        }
+
+        var arr = [-3, -2, 1, 2, 4];
+        console.log(getSquaresSorted(arr));
+    </script>
+</body>
+</html>

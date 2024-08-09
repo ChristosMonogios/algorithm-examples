@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        // The recursive solution, solve the problem by solving the subproblems
+        function factorialRecursion(n) {
+            // base case:
+            if (n === 0) {
+                return 1;
+            }
+            
+            // recursive case:
+            return factorialRecursion(n-1) * n;
+        }; 
+        console.log("factorial with for recursion: " + factorialRecursion(6)); 
+
+        /**
+         * The factorialFromMax and the factorialFromMin are just iterative algorithm that call the same function again and again.
+         * This is not real recursion.
+         */
+        function factorialFromMax(number, result) {
+            result = result * number--;
+            if (number <= 0) return result;
+            return factorialFromMax(number, result);
+        }
+        console.log("factorial from max: " + factorialFromMax(6, 1));
+
+        function factorialWithLoop(number) {
+            var result = 1;
+
+            for (var i=1; i<=number; i++) {
+                result = result * i;
+            }
+
+            return result;
+        }
+        console.log("factorial with for loop: " + factorialWithLoop(6));       
+    </script>
+</body>
+</html>

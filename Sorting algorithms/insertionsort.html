@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        /**
+         * Insertion sort:
+         */
+
+        function insertionSort(arr) {
+            var k = 1;
+            var length = arr.length;
+
+            for (var i=1; i<length; i++) {
+                var currentElement = arr[i]; // We store the current element, because we are going to override it
+                k = i;
+            
+                // go backwards and jump over the current element the elements that are greater than it.
+                while (currentElement < arr[k-1] && k >= 0) {
+                    // by do not swaping the element each time (with a temp variable) we can save some calculations
+                    arr[k] = arr[k-1];
+                    k--;
+                }
+
+                // add the current element to the landing position, after shifted (while) the greater elements on the right
+                arr[k] = currentElement;
+            }
+            return arr;
+        }
+
+        var arr = [1, 6, 8, 2, 4, 0, 19, 22, 11, 7];
+        console.log(insertionSort(arr));
+
+
+        function insertionSortMine(arr) {
+            var arrLen = arr.length;
+            var currentIndex = 1;
+            var index = 1;
+            var currentElement = 0;
+
+            for (var i=1; i<arrLen; i++) {
+                currentElement = arr[i];
+
+                for (var j=i; j>=0; j--) {
+                    if (arr[j-1] > currentElement) {
+                        arr[j] = arr[j-1];
+                    } else {
+                        arr[j] = currentElement;
+                        break;
+                    }
+                }
+            }
+
+            return arr;
+        }
+
+        arr = [1, 6, 8, 2, 4, 0, 19, 22, 11, 7];
+        console.log(insertionSortMine(arr));
+    </script>
+</body>
+</html>

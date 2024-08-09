@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        // Question:
+        // Write a function to return minimum and maximum in an array. 
+        // Your program should make minimum number of comparisons (less than O(n)).
+
+        // Compare each value once and keep track of the max and min, replace if you find a new one. 
+        // That only requires a single pass.
+        function findMinAndMax(arr) {
+            var min = max = arr[0];
+
+            for (var i=1; i<arr.length; i++) {
+                if (arr[i] > max) {
+                    max = arr[i];
+                } else if (arr[i] < min) {
+                    min = arr[i];
+                }
+            }
+
+            return {
+                min: min,
+                max: max
+            };
+        }
+
+        var arr = [23, 1, 5, 7, 2, 0, 10, 8, 3, 11, 1, 9, 0];
+        var result = findMinAndMax(arr);
+        console.log("min: " + result.min + " max: " + result.max);
+    </script>
+</body>
+</html>
